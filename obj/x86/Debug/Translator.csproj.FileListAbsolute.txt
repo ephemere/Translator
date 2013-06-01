@@ -7,3 +7,10 @@ c:\users\vladimirdel\documents\visual studio 2010\Projects\Translator\Translator
 c:\users\vladimirdel\documents\visual studio 2010\Projects\Translator\Translator\obj\x86\Debug\GenerateResource.write.1.tlog
 c:\users\vladimirdel\documents\visual studio 2010\Projects\Translator\Translator\obj\x86\Debug\Translator.exe
 c:\users\vladimirdel\documents\visual studio 2010\Projects\Translator\Translator\obj\x86\Debug\Translator.pdb
+C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.exe
+C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.pdb
+C:\Users\Phantom\Dropbox\We\Translator\bin\Debug\Translator.exe
+C:\Users\Phantom\Dropbox\We\Translator\bin\Debug\Translator.pdb
+C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.MainForm.resources
+C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.Properties.Resources.resources
+C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.csproj.GenerateResource.Cache

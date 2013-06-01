@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml;
+using System.Xml.Xsl;
 
 namespace Translator
 {
@@ -62,5 +65,22 @@ namespace Translator
         {
             btnSaveUml_Click(sender, e);
         }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XslCompiledTransform xsl = new XslCompiledTransform();
+                xsl.Load(xsltTable);
+                xsl.Transform(edtErmName.Text, edtUmlName.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private const String umlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+        private const String xsltTable = "C:\\Users\\Phantom\\Dropbox\\We\\Translator\\Samples\\Translation.xsl";
     }
 }

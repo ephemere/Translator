@@ -87,7 +87,7 @@
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -130,6 +130,7 @@
             this.edtErmName.Name = "edtErmName";
             this.edtErmName.Size = new System.Drawing.Size(306, 20);
             this.edtErmName.TabIndex = 3;
+            this.edtErmName.Text = "C:\\Users\\Phantom\\Dropbox\\We\\Translator\\Samples\\Test.ermmdsl";
             // 
             // edtUmlName
             // 
@@ -137,6 +138,7 @@
             this.edtUmlName.Name = "edtUmlName";
             this.edtUmlName.Size = new System.Drawing.Size(306, 20);
             this.edtUmlName.TabIndex = 4;
+            this.edtUmlName.Text = "C:\\Users\\Phantom\\Dropbox\\We\\Translator\\Samples\\Test.uml";
             // 
             // btnOpenErm
             // 
@@ -166,6 +168,7 @@
             this.btnRun.TabIndex = 7;
             this.btnRun.Text = "Запустить";
             this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // openFileDialog1
             // 
