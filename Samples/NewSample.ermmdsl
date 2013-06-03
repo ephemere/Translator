@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ermModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="9be6e20c-5024-433f-9301-402aede6b1d6" xmlns="http://schemas.microsoft.com/dsltools/ErmmLanguage">
+  <elements>
+    <entitySet Id="27af3642-6410-458f-a627-eae000506ce7" name="Человек">
+      <role>
+        <classifierReferencesRole Id="6d7a7ba6-9c36-4839-b414-d88b507966d1">
+          <roleMoniker name="/9be6e20c-5024-433f-9301-402aede6b1d6/Роль прообраза" />
+        </classifierReferencesRole>
+      </role>
+    </entitySet>
+  </elements>
+  <valueSet>
+    <ermModelHasValueSet Id="0aba40ff-950e-47fc-b2cb-832e36bc4c8e">
+      <valueSet Id="0c244a0a-9914-4b84-84b4-1414658ec304" name="string">
+        <role>
+          <classifierReferencesRole Id="c0895c6c-3e90-4a41-a6f4-2634ba2bc3c7">
+            <roleMoniker name="/9be6e20c-5024-433f-9301-402aede6b1d6/Роль образа" />
+          </classifierReferencesRole>
+        </role>
+      </valueSet>
+    </ermModelHasValueSet>
+  </valueSet>
+  <role>
+    <ermModelHasRole Id="40e1135d-bdf2-4ec4-a83d-74865445641b">
+      <role Id="346afc5c-0e49-40c7-9f91-35f4b17fc8c4" name="Роль прообраза" />
+    </ermModelHasRole>
+    <ermModelHasRole Id="42a02475-fae9-4d6d-b7e2-2c2bfcb96fa8">
+      <role Id="d0f4f84e-e298-4c15-8c85-5de174523a36" name="Роль образа" />
+    </ermModelHasRole>
+  </role>
+  <attributeMapping>
+    <ermModelHasAttributeMapping Id="24d076c4-8bcb-4522-9d76-a38717e0b092">
+      <attributeMapping Id="803b9213-436f-4e8e-88b3-ede2b534640f" name="Имя" minCardinality="1" maxCardinality="1">
+        <inRole>
+          <mappingInRole Id="940c03b0-11f7-4bc8-82da-9391211e8aa1">
+            <roleMoniker name="/9be6e20c-5024-433f-9301-402aede6b1d6/Роль прообраза" />
+          </mappingInRole>
+        </inRole>
+        <outRole>
+          <mappingOutRole Id="ba1d3c6b-324a-4a94-b0f4-b87d4317a4e4">
+            <roleMoniker name="/9be6e20c-5024-433f-9301-402aede6b1d6/Роль образа" />
+          </mappingOutRole>
+        </outRole>
+      </attributeMapping>
+    </ermModelHasAttributeMapping>
+  </attributeMapping>
+</ermModel>

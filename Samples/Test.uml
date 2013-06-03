@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelRoot dslVersion="1.0.0.0" Id="77dbda01-d2fa-4a8e-ae10-d9ddf313474c" name="" xmlns="http://schemas.microsoft.com/dsltools/UMLCreator" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core">
+  <types xmlns="">
+    <modelClass name="Строка" />
+  </types>
+</modelRoot>

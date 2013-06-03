@@ -1,17 +1,17 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:template match="ermModel">
+<xsl:output method="xml" indent="yes"/>
+<xsl:template match="*[name()='ermModel']">
 	<modelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="77dbda01-d2fa-4a8e-ae10-d9ddf313474c" name="" xmlns="http://schemas.microsoft.com/dsltools/UMLCreator">
-  	<xsl:apply-templates select="valueSet"/>
+  	<xsl:apply-templates select="*[name()='valueSet']//*[@name]"/>
 	</modelRoot>
 		
 </xsl:template>
 
-<xsl:template match="valueSet">
+<xsl:template match="*[name()='valueSet']//*[@name]">
 	<types>
-		<xsl:text><modelClass name=</xsl:text>
-		<xsl:value-of select="name"/>
-		<xsl:text>></xsl:text>
+		<xsl:variable name="name" select="//*[name()='valueSet'][@name]/@name"/>
+		<modelClass name="{$name}"/>
 	</types>
-
 </xsl:template>
+
 </xsl:stylesheet>

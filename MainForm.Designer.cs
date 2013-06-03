@@ -130,7 +130,7 @@
             this.edtErmName.Name = "edtErmName";
             this.edtErmName.Size = new System.Drawing.Size(306, 20);
             this.edtErmName.TabIndex = 3;
-            this.edtErmName.Text = "C:\\Users\\Phantom\\Dropbox\\We\\Translator\\Samples\\Test.ermmdsl";
+            this.edtErmName.Text = "Z:\\Dropbox\\We\\Translator\\Samples\\Test1.ermmdsl";
             // 
             // edtUmlName
             // 
@@ -138,7 +138,7 @@
             this.edtUmlName.Name = "edtUmlName";
             this.edtUmlName.Size = new System.Drawing.Size(306, 20);
             this.edtUmlName.TabIndex = 4;
-            this.edtUmlName.Text = "C:\\Users\\Phantom\\Dropbox\\We\\Translator\\Samples\\Test.uml";
+            this.edtUmlName.Text = "Z:\\Dropbox\\We\\Translator\\Samples\\Test.uml";
             // 
             // btnOpenErm
             // 

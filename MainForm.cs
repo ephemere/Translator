@@ -73,14 +73,70 @@ namespace Translator
                 XslCompiledTransform xsl = new XslCompiledTransform();
                 xsl.Load(xsltTable);
                 xsl.Transform(edtErmName.Text, edtUmlName.Text);
+                transformRelationship(edtErmName.Text, edtUmlName.Text);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            Close();
+        }
+
+        private void transformRelationship(String ermFile, String umlFile)
+        {
+            XmlDocument erm = new XmlDocument();
+            XmlDocument uml = new XmlDocument();
+            erm.Load(ermFile);
+            uml.Load(umlFile);
+            XmlNodeList relationList = erm.SelectNodes("/ermModel/relationshipSet/ermModelHasRelationshipSet/relationshipSet");
+            foreach (XmlNode relation in relationList)
+            {
+                String relationName = relation.Attributes["name"].Value;
+                List<String> entitySets = new List<String>();
+                List<String> roles = new List<String>();
+                List<String> cards = new List<String>();
+                List<String> attrNames = new List<String>();
+                List<String> attrTypes = new List<String>();
+                XmlNodeList attrList = relation.SelectNodes("valueSet/relationshipSetReferencesValueSet");
+                foreach (XmlNode attr in attrList)
+                {
+                    attrNames.Add(attr.Attributes["name"].Value);
+                    String t = attr.SelectNodes("valueSetMoniker")[0].Attributes["name"].Value;
+                    t = t.Remove(0, t.LastIndexOf('/') + 1);
+                    attrTypes.Add(t);
+                }
+                XmlNodeList entitySetList = erm.SelectNodes("/ermModel/elements/entitySet");
+                foreach (XmlNode entitySet in entitySetList)
+                {
+                    String entitySetName = entitySet.Attributes["name"].Value;
+                    XmlNodeList roleSet = entitySet.SelectNodes("relationshipSet/entitySetPlaysRoleInRelationshipSet");
+                    foreach (XmlNode role in roleSet)
+                    {
+                        String roleName = role.SelectNodes("relationshipSetMoniker")[0].Attributes["name"].Value;
+                        if (!roleName.Contains(relationName)) continue;
+                        String c = role.Attributes["card"].Value;
+                        String r = role.Attributes["name"].Value;
+                        entitySets.Add(entitySetName);
+                        cards.Add(c);
+                        roles.Add(r);
+                        break;
+                    }
+                }
+
+                if (entitySets.Count == 2 && attrNames.Count == 0)
+                {
+                    //находим uml, ему ставим отношение
+                }
+                else
+                {
+                    //создаем новый класс, и ему ставим атрибуты и прочую фигню.
+                }
+
+
+            }
         }
 
         private const String umlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-        private const String xsltTable = "C:\\Users\\Phantom\\Dropbox\\We\\Translator\\Samples\\Translation.xsl";
+        private const String xsltTable = "Z:\\Dropbox\\We\\Translator\\Samples\\Translation.xsl";
     }
 }
