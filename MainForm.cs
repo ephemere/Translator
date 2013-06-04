@@ -72,7 +72,8 @@ namespace Translator
             try
             {
                 XslCompiledTransform xsl = new XslCompiledTransform();
-                xsl.Load(xsltTable);
+                if (isAttr) xsl.Load(xsltTable1);
+                if (isClass) xsl.Load(xsltTable2);
                 modifyErm(edtErmName.Text);
                 xsl.Transform(edtErmName.Text + ".tmp", edtUmlName.Text);
                 XmlDocument doc = new XmlDocument();
@@ -228,13 +229,17 @@ namespace Translator
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OptionsForm f = new OptionsForm();
-            f.setPath(xsltTable);
             if (f.ShowDialog() == DialogResult.OK)
-                xsltTable = f.getPath();
+            {
+                isAttr = f.isAttr;
+                isClass = f.isClass;
+            }
         }
 
         private const String umlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-        private String xsltTable = "Z:\\Dropbox\\We\\Translator\\Translator\\Samples\\TranslationOne.xsl";
-
+        private const String xsltTable1 = "TranslationOne.xsl";
+        private const String xsltTable2 = "TranslationTwo.xsl";
+        private Boolean isAttr = true;
+        private Boolean isClass = false;
     }
 }
