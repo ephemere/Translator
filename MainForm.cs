@@ -10,6 +10,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Translator
 {
@@ -76,31 +77,48 @@ namespace Translator
                 modifyErm(edtErmName.Text);
                 xsl.Transform(edtErmName.Text + ".tmp", edtUmlName.Text);
                 XmlDocument doc = new XmlDocument();
-                doc.Load(edtUmlName.Text);
-                XmlNode root = doc.SelectNodes("/*[name()='modelRoot']")[0];
-                XmlAttribute[] a = new XmlAttribute[root.Attributes.Count];
-                root.Attributes.CopyTo(a, 0);
+                XmlTextReader r = new XmlTextReader(edtUmlName.Text);
+                r.Namespaces = false;
+                doc.Load(r);
+                r.Close();
+                XmlNode root = doc.SelectSingleNode("/*[name()='modelRoot']");
                 root.Attributes.RemoveAll();
-                doc.Save(edtUmlName.Text);
-                transformRelationship(edtErmName.Text + ".tmp", edtUmlName.Text);
-                foreach (XmlAttribute at in a)
-                    root.Attributes.Append(at);
-                doc.Save(edtUmlName.Text);
+                doc.Save(edtUmlName.Text + ".tmp");
+                transformRelationship(edtErmName.Text + ".tmp", edtUmlName.Text + ".tmp");
+                doc.Load(edtUmlName.Text + ".tmp");
+                root = doc.SelectSingleNode("/*[name()='modelRoot']");
+                {
+                    XmlDocument d = new XmlDocument();
+                    d.Load(edtUmlName.Text);
+                    XmlNode dr = d.SelectSingleNode("/*[name()='modelRoot']");
+                    XmlAttribute[] attrs = new XmlAttribute[dr.Attributes.Count];
+                    dr.Attributes.CopyTo(attrs, 0);
+
+                    foreach (XmlAttribute a in attrs)
+                    {
+                        XmlAttribute at = doc.CreateAttribute(a.Name);
+                        at.Value = a.Value;
+                        root.Attributes.Append(at);
+                    }
+                    doc.Save(edtUmlName.Text);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             File.Delete(edtErmName.Text + ".tmp");
+            File.Delete(edtUmlName.Text + ".tmp");
             Close();
         }
 
         private void modifyErm(string p)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(p);
-            XmlNode node = doc.SelectNodes("/*[name()='ermModel']")[0];
-            node.Attributes.RemoveAll();
+            XmlTextReader r = new XmlTextReader(p);
+            r.Namespaces = false;
+            doc.Load(r);
+            doc.SelectSingleNode("/*[name()='ermModel']").Attributes.RemoveAll();
             doc.Save(p + ".tmp");
         }
 
@@ -150,10 +168,13 @@ namespace Translator
                 {
                     //находим uml, ему ставим отношение
                     XmlNode node = uml.SelectSingleNode("/modelRoot/types/modelClass[@name='" + entitySets[0] + "']/bidirectionalTargets");
-                    XmlDocument temp = new XmlDocument();
-                    temp.LoadXml("<bidirectionalAssociation sourceRoleName=\"" + roles[0] + "\" targetRoleName=\"" + roles[1] + "\"><modelClassMoniker name=\"//" + entitySets[1] + "\"/></bidirectionalAssociation>");
-                    XmlNode child = node.OwnerDocument.ImportNode(temp.DocumentElement, true);
-                    node.AppendChild(child);
+                    if (node == null)
+                    {
+                        node = uml.SelectSingleNode("/modelRoot/types/modelClass[@name='" + entitySets[0] + "']");
+                        AddChild("<bidirectionalTargets/>", node);
+                        node = uml.SelectSingleNode("/modelRoot/types/modelClass[@name='" + entitySets[0] + "']/bidirectionalTargets");
+                    }
+                    AddChild("<bidirectionalAssociation sourceRoleName=\"" + roles[0] + "\" targetRoleName=\"" + roles[1] + "\"><modelClassMoniker name=\"//" + entitySets[1] + "\"/></bidirectionalAssociation>", node);
                 }
                 else
                 {
@@ -162,6 +183,15 @@ namespace Translator
 
 
             }
+            uml.Save(umlFile);
+        }
+
+        private void AddChild(String xml, XmlNode node)
+        {
+            XmlDocument temp = new XmlDocument();
+            temp.LoadXml(xml);
+            XmlNode child = node.OwnerDocument.ImportNode(temp.DocumentElement, true);
+            node.AppendChild(child);
         }
 
         private const String umlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
