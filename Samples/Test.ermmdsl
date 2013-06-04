@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ermModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="d141ba33-e070-4944-b138-f4000b6d69e2" xmlns="http://schemas.microsoft.com/dsltools/ErmmLanguage">
+  <elements>
+    <entitySet Id="f81c2570-4078-43d9-9587-86d1ecc538ff" name="Человек">
+      <relationshipSet>
+        <entitySetPlaysRoleInRelationshipSet Id="b7140e57-06e5-4696-9623-09f7bb3d0755" name="Является" card="1">
+          <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Хозяин" />
+        </entitySetPlaysRoleInRelationshipSet>
+      </relationshipSet>
+    </entitySet>
+    <entitySet Id="2922e186-5f98-49f6-b521-3533e2de0945" name="Животное">
+      <relationshipSet>
+        <entitySetPlaysRoleInRelationshipSet Id="090ddeb8-34f6-47a6-b67a-20e8f2d3a07a" name="Считает" card="М">
+          <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Хозяин" />
+        </entitySetPlaysRoleInRelationshipSet>
+      </relationshipSet>
+    </entitySet>
+  </elements>
+  <relationshipSet>
+    <ermModelHasRelationshipSet Id="36dcfbf9-6f1c-441d-90de-69b48f589727">
+      <relationshipSet Id="0af6b7a5-728c-4401-a032-5900a40a3d62" name="Хозяин" />
+    </ermModelHasRelationshipSet>
+  </relationshipSet>
+</ermModel>

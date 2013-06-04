@@ -1,29 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ermModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="d141ba33-e070-4944-b138-f4000b6d69e2" xmlns="http://schemas.microsoft.com/dsltools/ErmmLanguage">
-  <elements>
-    <entitySet Id="f20d4896-a8db-4652-996a-a6e02c0015de" name="Man">
-      <relationshipSet>
-        <entitySetPlaysRoleInRelationshipSet Id="33db6570-5adb-4965-b439-ef6bbc2f5648" card="1">
-          <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Proprietor" />
-        </entitySetPlaysRoleInRelationshipSet>
-      </relationshipSet>
-    </entitySet>
-    <entitySet Id="d0df4f24-a97e-4894-82fd-3bd446f239f8" name="Pet">
-      <relationshipSet>
-        <entitySetPlaysRoleInRelationshipSet Id="88c1d7b6-3913-4ba4-b79b-4b01ab15e0f2" card="М">
-          <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Proprietor" />
-        </entitySetPlaysRoleInRelationshipSet>
-      </relationshipSet>
-    </entitySet>
-  </elements>
-  <relationshipSet>
-    <ermModelHasRelationshipSet Id="8122d630-9abd-471c-9748-8e705c7802b8">
-      <relationshipSet Id="df467e88-7ab8-4bd7-8a5a-b70db51f4f2e" name="Proprietor" />
-    </ermModelHasRelationshipSet>
-  </relationshipSet>
-  <valueSet>
-    <ermModelHasValueSet Id="a3f11e83-3ead-40da-b260-2f9cf537b495">
-      <valueSet Id="20ba013b-3adb-4b6d-9188-1e5ac8ac8cf3" name="Строка" />
-    </ermModelHasValueSet>
-  </valueSet>
+<ermModel>
+    <elements>
+        <entitySet Id="f20d4896-a8db-4652-996a-a6e02c0015de" name="Man">
+            <relationshipSet>
+                <entitySetPlaysRoleInRelationshipSet Id="33db6570-5adb-4965-b439-ef6bbc2f5648" name="Is" card="1">
+                    <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Proprietor" />
+                </entitySetPlaysRoleInRelationshipSet>
+                <entitySetPlaysRoleInRelationshipSet Id="95b70a77-626b-47f2-86a0-270c87375f8a" name="of" card="1">
+                    <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Parent" />
+                </entitySetPlaysRoleInRelationshipSet>
+            </relationshipSet>
+        </entitySet>
+        <entitySet Id="d0df4f24-a97e-4894-82fd-3bd446f239f8" name="Pet">
+            <relationshipSet>
+                <entitySetPlaysRoleInRelationshipSet Id="88c1d7b6-3913-4ba4-b79b-4b01ab15e0f2" name="Belongs" card="М">
+                    <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Proprietor" />
+                </entitySetPlaysRoleInRelationshipSet>
+            </relationshipSet>
+        </entitySet>
+        <entitySet Id="ba9ed008-96c5-449b-926f-94550f4e0d0d" name="OldMan">
+            <relationshipSet>
+                <entitySetPlaysRoleInRelationshipSet Id="56dfd12a-efca-4f60-98ab-7f1ea6c472a8" name="is" card="1">
+                    <relationshipSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Parent" />
+                </entitySetPlaysRoleInRelationshipSet>
+            </relationshipSet>
+        </entitySet>
+    </elements>
+    <relationshipSet>
+        <ermModelHasRelationshipSet Id="8122d630-9abd-471c-9748-8e705c7802b8">
+            <relationshipSet Id="df467e88-7ab8-4bd7-8a5a-b70db51f4f2e" name="Proprietor">
+                <valueSet>
+                    <relationshipSetReferencesValueSet Id="3281c2a7-86bc-4f73-9034-d749b4565a4a" name="Срок">
+                        <valueSetMoniker name="/d141ba33-e070-4944-b138-f4000b6d69e2/Строка" />
+                    </relationshipSetReferencesValueSet>
+                </valueSet>
+            </relationshipSet>
+        </ermModelHasRelationshipSet>
+        <ermModelHasRelationshipSet Id="a6db474f-da57-4340-9b71-b30804418ef8">
+            <relationshipSet Id="025b9607-9bd8-41b1-8e1b-0ea6ee0665dd" name="Parent" />
+        </ermModelHasRelationshipSet>
+    </relationshipSet>
+    <valueSet>
+        <ermModelHasValueSet Id="a3f11e83-3ead-40da-b260-2f9cf537b495">
+            <valueSet Id="20ba013b-3adb-4b6d-9188-1e5ac8ac8cf3" name="Строка" />
+        </ermModelHasValueSet>
+    </valueSet>
 </ermModel>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ermModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="9be6e20c-5024-433f-9301-402aede6b1d6" xmlns="http://schemas.microsoft.com/dsltools/ErmmLanguage">
+<ermModel>
   <elements>
     <entitySet Id="27af3642-6410-458f-a627-eae000506ce7" name="Человек">
       <role>
@@ -8,6 +8,7 @@
         </classifierReferencesRole>
       </role>
     </entitySet>
+    <entitySet Id="89379418-0053-45f2-b9ef-1f17df00d6cc" name="Forever-alone" />
   </elements>
   <valueSet>
     <ermModelHasValueSet Id="0aba40ff-950e-47fc-b2cb-832e36bc4c8e">
@@ -18,6 +19,9 @@
           </classifierReferencesRole>
         </role>
       </valueSet>
+    </ermModelHasValueSet>
+    <ermModelHasValueSet Id="49524094-5b86-414b-88b3-764b1d682eeb">
+      <valueSet Id="c3e2a757-883f-4ee6-9846-798c9502f0f5" name="Integer" />
     </ermModelHasValueSet>
   </valueSet>
   <role>

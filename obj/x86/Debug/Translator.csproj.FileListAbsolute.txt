@@ -14,3 +14,4 @@ C:\Users\Phantom\Dropbox\We\Translator\bin\Debug\Translator.pdb
 C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.MainForm.resources
 C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.Properties.Resources.resources
 C:\Users\Phantom\Dropbox\We\Translator\obj\x86\Debug\Translator.csproj.GenerateResource.Cache
+C:\Users\VladimirDel\Documents\Visual Studio 2010\Projects\Translator\Translator\obj\x86\Debug\Translator.OptionsForm.resources

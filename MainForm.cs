@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Xml.Xsl;
-using System.Linq;
 using System.Xml.Serialization;
 
 namespace Translator
@@ -179,6 +178,7 @@ namespace Translator
                 else
                 {
                     //создаем новый класс, и ему ставим атрибуты и прочую фигню.
+
                 }
 
 
@@ -194,7 +194,15 @@ namespace Translator
             node.AppendChild(child);
         }
 
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsForm f = new OptionsForm();
+            f.setPath(xsltTable);
+            if (f.ShowDialog() == DialogResult.OK)
+                xsltTable = f.getPath();
+        }
+
         private const String umlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-        private const String xsltTable = "Z:\\Dropbox\\We\\Translator\\Samples\\Translation.xsl";
+        private String xsltTable = "Z:\\Dropbox\\We\\Translator\\Samples\\Translation.xsl";
     }
 }
