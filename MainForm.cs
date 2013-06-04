@@ -140,8 +140,12 @@ namespace Translator
                 XmlNodeList attrList = relation.SelectNodes("valueSet/relationshipSetReferencesValueSet");
                 foreach (XmlNode attr in attrList)
                 {
-                    attrNames.Add(attr.Attributes["name"].Value);
-                    String t = attr.SelectNodes("valueSetMoniker")[0].Attributes["name"].Value;
+                    String t = "";
+                    if (attr.Attributes["name"] != null)
+                        t = attr.Attributes["name"].Value;
+                    attrNames.Add(t);
+                    if (attr.SelectNodes("valueSetMoniker")[0].Attributes["name"] != null)
+                        t = attr.SelectNodes("valueSetMoniker")[0].Attributes["name"].Value;
                     t = t.Remove(0, t.LastIndexOf('/') + 1);
                     attrTypes.Add(t);
                 }
@@ -154,8 +158,12 @@ namespace Translator
                     {
                         String roleName = role.SelectNodes("relationshipSetMoniker")[0].Attributes["name"].Value;
                         if (!roleName.Contains(relationName)) continue;
-                        String c = role.Attributes["card"].Value;
-                        String r = role.Attributes["name"].Value;
+                        String c = "";
+                        if (role.Attributes["card"] != null)
+                            c = role.Attributes["card"].Value;
+                        String r = "";
+                        if (role.Attributes["name"] != null)
+                            r = role.Attributes["name"].Value;
                         entitySets.Add(entitySetName);
                         cards.Add(c);
                         roles.Add(r);
@@ -195,8 +203,8 @@ namespace Translator
                     for (int i = 0; i < entitySets.Count; i++)
                     {
                         String sourceMultiplicity = "ZeroMany";
-                        String targetMultiplicity = "ZeroMany";
-                        if (cards[i] == "1") targetMultiplicity = "One";
+                        String targetMultiplicity = "One";
+                        //if (cards[i] == "1") targetMultiplicity = "One";
                         xmlChild += "<bidirectionalAssociation sourceMultiplicity=\"" + sourceMultiplicity + "\" targetMultiplicity=\"" + targetMultiplicity + "\" >";
                         xmlChild += "<modelClassMoniker name=\"//" + entitySets[i] + "\"/>";
                         xmlChild += "</bidirectionalAssociation>";
@@ -226,6 +234,7 @@ namespace Translator
         }
 
         private const String umlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-        private String xsltTable = "Z:\\Dropbox\\We\\Translator\\Samples\\Translation.xsl";
+        private String xsltTable = "Z:\\Dropbox\\We\\Translator\\Translator\\Samples\\TranslationOne.xsl";
+
     }
 }
