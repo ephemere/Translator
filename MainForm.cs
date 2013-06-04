@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Xml.Xsl;
+using System.Linq;
 
 namespace Translator
 {
@@ -73,7 +74,7 @@ namespace Translator
                 XslCompiledTransform xsl = new XslCompiledTransform();
                 xsl.Load(xsltTable);
                 modifyErm(edtErmName.Text);
-                xsl.Transform(edtErmName.Text, edtUmlName.Text);
+                xsl.Transform(edtErmName.Text + ".tmp", edtUmlName.Text);
                 XmlDocument doc = new XmlDocument();
                 doc.Load(edtUmlName.Text);
                 XmlNode root = doc.SelectNodes("/*[name()='modelRoot']")[0];
@@ -81,7 +82,7 @@ namespace Translator
                 root.Attributes.CopyTo(a, 0);
                 root.Attributes.RemoveAll();
                 doc.Save(edtUmlName.Text);
-                //transformRelationship(edtErmName.Text + ".tmp", edtUmlName.Text);
+                transformRelationship(edtErmName.Text + ".tmp", edtUmlName.Text);
                 foreach (XmlAttribute at in a)
                     root.Attributes.Append(at);
                 doc.Save(edtUmlName.Text);
@@ -148,6 +149,11 @@ namespace Translator
                 if (entitySets.Count == 2 && attrNames.Count == 0)
                 {
                     //находим uml, ему ставим отношение
+                    XmlNode node = uml.SelectSingleNode("/modelRoot/types/modelClass[@name='" + entitySets[0] + "']/bidirectionalTargets");
+                    XmlDocument temp = new XmlDocument();
+                    temp.LoadXml("<bidirectionalAssociation sourceRoleName=\"" + roles[0] + "\" targetRoleName=\"" + roles[1] + "\"><modelClassMoniker name=\"//" + entitySets[1] + "\"/></bidirectionalAssociation>");
+                    XmlNode child = node.OwnerDocument.ImportNode(temp.DocumentElement, true);
+                    node.AppendChild(child);
                 }
                 else
                 {
