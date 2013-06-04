@@ -173,15 +173,38 @@ namespace Translator
                         AddChild("<bidirectionalTargets/>", node);
                         node = uml.SelectSingleNode("/modelRoot/types/modelClass[@name='" + entitySets[0] + "']/bidirectionalTargets");
                     }
-                    AddChild("<bidirectionalAssociation sourceRoleName=\"" + roles[0] + "\" targetRoleName=\"" + roles[1] + "\"><modelClassMoniker name=\"//" + entitySets[1] + "\"/></bidirectionalAssociation>", node);
+                    String sourceMultiplicity = "ZeroMany";
+                    String targetMultiplicity = "ZeroMany";
+                    if (cards[0] == "1") sourceMultiplicity = "ZeroOne";
+                    if (cards[1] == "1") targetMultiplicity = "ZeroMany";
+                    AddChild("<bidirectionalAssociation sourceMultiplicity=\"" + sourceMultiplicity + "\" targetMultiplicity=\"" + targetMultiplicity + "\" sourceRoleName=\"" + roles[0] + "\" targetRoleName=\"" + roles[1] + "\"><modelClassMoniker name=\"//" + entitySets[1] + "\"/></bidirectionalAssociation>", node);
                 }
                 else
                 {
                     //создаем новый класс, и ему ставим атрибуты и прочую фигню.
-
+                    XmlNode root = uml.SelectSingleNode("/modelRoot/types");
+                    String xmlChild = "<modelClass name=\"" + relationName + "\">";
+                    if (attrNames.Count != 0)
+                    {
+                        xmlChild += "<attributes>";
+                        for (int i = 0; i < attrNames.Count; i++)
+                            xmlChild += "<modelAttribute name=\"" + attrNames[i] + "\" type=\"" + attrTypes[i] + "\" />";
+                        xmlChild += "</attributes>";
+                    }
+                    xmlChild += "<bidirectionalTargets>";
+                    for (int i = 0; i < entitySets.Count; i++)
+                    {
+                        String sourceMultiplicity = "ZeroMany";
+                        String targetMultiplicity = "ZeroMany";
+                        if (cards[i] == "1") targetMultiplicity = "One";
+                        xmlChild += "<bidirectionalAssociation sourceMultiplicity=\"" + sourceMultiplicity + "\" targetMultiplicity=\"" + targetMultiplicity + "\" >";
+                        xmlChild += "<modelClassMoniker name=\"//" + entitySets[i] + "\"/>";
+                        xmlChild += "</bidirectionalAssociation>";
+                    }
+                    xmlChild += "</bidirectionalTargets>";
+                    xmlChild += "</modelClass>";
+                    AddChild(xmlChild, root);
                 }
-
-
             }
             uml.Save(umlFile);
         }
