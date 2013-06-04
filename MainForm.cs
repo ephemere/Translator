@@ -72,15 +72,37 @@ namespace Translator
             {
                 XslCompiledTransform xsl = new XslCompiledTransform();
                 xsl.Load(xsltTable);
+                modifyErm(edtErmName.Text);
                 xsl.Transform(edtErmName.Text, edtUmlName.Text);
-                transformRelationship(edtErmName.Text, edtUmlName.Text);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(edtUmlName.Text);
+                XmlNode root = doc.SelectNodes("/*[name()='modelRoot']")[0];
+                XmlAttribute[] a = new XmlAttribute[root.Attributes.Count];
+                root.Attributes.CopyTo(a, 0);
+                root.Attributes.RemoveAll();
+                doc.Save(edtUmlName.Text);
+                //transformRelationship(edtErmName.Text + ".tmp", edtUmlName.Text);
+                foreach (XmlAttribute at in a)
+                    root.Attributes.Append(at);
+                doc.Save(edtUmlName.Text);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            File.Delete(edtErmName.Text + ".tmp");
             Close();
         }
+
+        private void modifyErm(string p)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(p);
+            XmlNode node = doc.SelectNodes("/*[name()='ermModel']")[0];
+            node.Attributes.RemoveAll();
+            doc.Save(p + ".tmp");
+        }
+
 
         private void transformRelationship(String ermFile, String umlFile)
         {
