@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:template match="/ermModel">
         <modelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="77dbda01-d2fa-4a8e-ae10-d9ddf313474c" name="" xmlns="http://schemas.microsoft.com/dsltools/UMLCreator">
@@ -37,11 +37,11 @@
                                         <xsl:variable name="valueSetName" select="../../../@name"/>
                                         <!-- Выводим аттрибут класса -->
                                         <xsl:choose>
-                                            <xsl:when test="$minCardinality='0' and $maxCardinality='M'">
+                                            <xsl:when test="($minCardinality='0' and $maxCardinality='M') or (not($minCardinality) and not($maxCardinality))">
                                                 <modelAttribute name="{$mappingName}" type="list" multiplicity="M"/>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <modelAttribute name="{$entitySetName}" type="{$valueSetName}"/>
+                                                <modelAttribute name="{$mappingName}" type="{$valueSetName}"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:for-each>
